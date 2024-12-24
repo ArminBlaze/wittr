@@ -1,5 +1,10 @@
 self.addEventListener('fetch', (e) => {
-	e.respondWith(
-		fetch('/imgs/dr-evil.gif')
-	);
+	const url = e.request.url;
+
+	if(/\.jpg$/.test(url)) {
+		console.log('Запрос заканчивается на jpg: ', url);
+		e.respondWith(
+			fetch('/imgs/dr-evil.gif')
+		);
+	}
 });
