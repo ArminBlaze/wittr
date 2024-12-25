@@ -1,10 +1,13 @@
-self.addEventListener('fetch', (e) => {
-	const url = e.request.url;
 
-	if(/\.jpg$/.test(url)) {
-		console.log('Запрос заканчивается на jpg: ', url);
-		e.respondWith(
-			fetch('/imgs/dr-evil.gif')
-		);
-	}
+self.addEventListener('fetch', (e) => {
+	e.respondWith(
+		fetch(e.request).then((response) => {
+			if(response.status == 404) {
+				return fetch('/imgs/dr-evil.gif');
+			}
+			return response;
+		}).catch(() => {
+			return new Response('Ошибка сервера');
+		})
+	);
 });
