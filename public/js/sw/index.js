@@ -19,11 +19,7 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('fetch', function(e) {
-  // Leave this blank for now.
-  // We'll get to this in the next task.
-
 	const url = e.request.url;
-	// console.log("Запрос адреса: ", url);
 
 	e.respondWith(
 		caches.match(url).then(response => {
